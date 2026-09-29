@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Clone</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #0f0f0f;
+    }
+
+    /* Header */
+    header {
+      height: 65px;
+      display: flex;
+      align-items: center;
+      padding: 0 22px;
+      border-bottom: 1px solid #ddd;
+      gap: 25px;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    .menu {
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .logo {
+      color: red;
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    .search {
+      display: flex;
+      width: 48%;
+      margin-left: 40px;
+    }
+
+    .search input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 20px 0 0 20px;
+      padding: 0 18px;
+      font-size: 15px;
+    }
+
+    .search button {
+      width: 65px;
+      border: 1px solid #ccc;
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      background: #f8f8f8;
+      cursor: pointer;
+    }
+
+    .mic {
+      font-size: 20px;
+    }
+
+    .profile {
+      margin-left: auto;
+      width: 35px;
+      height: 35px;
+      background: #6b55c7;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Layout */
+    .main {
+      display: flex;
+    }
+
+    /* Sidebar */
+    aside {
+      width: 210px;
+      padding: 20px 12px;
+      border-right: 1px solid #eee;
+      min-height: calc(100vh - 65px);
+    }
+
+    .side-item {
+      padding: 12px 15px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .side-item:hover {
+      background: #eee;
+    }
+
+    .side-item:first-child {
+      background: #eee;
+      font-weight: bold;
+    }
+
+    .heading {
+      margin: 25px 15px 10px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 20px 25px;
+      overflow: hidden;
+    }
+
+    .categories {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+      overflow-x: auto;
+    }
+
+    .category {
+      background: #f2f2f2;
+      padding: 9px 16px;
+      border-radius: 8px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .category.active {
+      background: #111;
+      color: white;
+    }
+
+    /* Videos */
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px 18px;
+    }
+
+    .video {
+      cursor: pointer;
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: 145px;
+      object-fit: cover;
+      border-radius: 9px;
+      display: block;
+    }
+
+    .video-info {
+      display: flex;
+      gap: 10px;
+      padding-top: 10px;
+    }
+
+    .channel {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #ddd;
+      flex-shrink: 0;
+    }
+
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+    .details {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #666;
+      line-height: 18px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .videos {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      aside {
+        width: 170px;
+      }
+    }
+
+    @media (max-width: 750px) {
+      aside {
+        display: none;
+      }
+
+      .videos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search {
+        margin-left: 0;
+        width: 55%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .videos {
+        grid-template-columns: 1fr;
+      }
+
+      .search {
+        width: 45%;
+      }
+
+      .mic {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="menu">☰</div>
+
+    <div class="logo">▶ YouTube</div>
+
+    <div class="search">
+      <input type="text" placeholder="Search">
+      <button>🔍</button>
+    </div>
+
+    <div class="mic">🎙️</div>
+
+    <div class="profile">C</div>
+  </header>
+
+
+  <div class="main">
+
+    <!-- Sidebar -->
+    <aside>
+
+      <div class="side-item">🏠 Home</div>
+      <div class="side-item">🔥 Explore</div>
+      <div class="side-item">📺 Subscriptions</div>
+      <div class="side-item">📚 Library</div>
+      <div class="side-item">🕘 History</div>
+      <div class="side-item">🎬 Your videos</div>
+      <div class="side-item">⏰ Watch later</div>
+      <div class="side-item">👍 Liked videos</div>
+
+      <div class="heading">SUBSCRIPTIONS</div>
+
+      <div class="side-item">🎵 Music</div>
+      <div class="side-item">⚽ Sports</div>
+      <div class="side-item">🎮 Gaming</div>
+      <div class="side-item">📰 News</div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <section class="content">
+
+      <!-- Categories -->
+      <div class="categories">
+        <div class="category active">All</div>
+        <div class="category">Music</div>
+        <div class="category">Mixes</div>
+        <div class="category">User interface design</div>
+        <div class="category">Nollywood</div>
+        <div class="category">Logos</div>
+        <div class="category">Graphic design</div>
+        <div class="category">Website</div>
+        <div class="category">Computer Science</div>
+      </div>
+
+
+      <!-- Videos -->
+      <div class="videos">
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=1">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">4-Year Medical Doctor Degree in UK</div>
+              <div class="details">Study Medicine<br>95K views • 5 months ago</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=2">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">UI Design Trends 2021</div>
+              <div class="details">DesignSense<br>52K views • 5 months ago</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=3">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">Simi - Complete Me</div>
+              <div class="details">X3M Music<br>7M views • 3 years ago</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=4">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">Data Analyst Career Switch</div>
+              <div class="details">The Work Life Man<br>50K views • 1 month ago</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=5">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">Stubborn Billionaires</div>
+              <div class="details">Complete Stories<br>1.8M views • 1 month ago</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=6">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">Linda Osifo and Olakina</div>
+              <div class="details">The NdanGFShow<br>13K views • 2 weeks ago</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=7">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">Designing a Complete Brand Identity</div>
+              <div class="details">Sydney Design<br>1.5M views • 6 months ago</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="video">
+          <img class="thumbnail"
+          src="https://picsum.photos/500/300?random=8">
+          <div class="video-info">
+            <div class="channel"></div>
+            <div>
+              <div class="title">7 Mistakes Ladies Make When They Like a Guy</div>
+              <div class="details">Relationship Advice<br>127K views • 1 year ago</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
